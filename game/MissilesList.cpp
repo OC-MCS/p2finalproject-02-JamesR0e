@@ -17,6 +17,7 @@ void Missiles::drawMissiles(RenderWindow & win)
 	for (iter = missiles.begin(); iter != missiles.end(); iter++)
 	{
 		iter->draw(win);
+		iter->move();
 	}
 }
 
@@ -25,7 +26,7 @@ void Missiles::removemissile(Sprite background)
 	list<Missile>::iterator iter;
 	for (iter = missiles.begin(); iter != missiles.end(); iter++)
 	{
-		if (!background.getGlobalBounds().contains(iter->getposition()));
+		if (!background.getGlobalBounds().contains(iter->getposition()))
 		{
 			iter = missiles.erase(iter);
 		}

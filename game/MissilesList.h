@@ -1,4 +1,10 @@
 #pragma once
+#include <iostream>
+using namespace std;
+#include <SFML/Graphics.hpp>
+using namespace sf;
+#include "Missile.h"
+#include <list>
 class Missiles
 {
 private:

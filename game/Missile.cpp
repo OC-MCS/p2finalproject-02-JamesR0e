@@ -11,7 +11,7 @@ Missile::Missile(Texture texture, Vector2f coord)
 }
 void Missile::move()
 {
-	missile.move(0, 10);
+	missile.move(0, -10);
 }
 void Missile::draw(RenderWindow & win)
 {

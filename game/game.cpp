@@ -68,6 +68,12 @@ int main()
 		cout << "Unable to load stars texture!" << endl;
 		exit(EXIT_FAILURE);
 	}
+	Texture missiletexture;
+	if (!missiletexture.loadFromFile("missile.png"))
+	{
+		cout << "Unable to load missile texture" << endl;
+		exit(EXIT_FAILURE);
+	}
 
 	// A sprite is a thing we can draw and manipulate on the screen.
 	// We have to give it a "texture" to specify what it looks like
@@ -88,10 +94,17 @@ int main()
 	ship.setPosition(shipX, shipY);
 
 	Missiles list;
-
+	Missile* ptr;
+	int framecount = 0; //counts the frames for timing
+	bool canshoot = true;
 
 	while (window.isOpen())
 	{
+		framecount++;
+		if ((framecount % 30) == 29)
+		{
+			canshoot = true;
+		}
 		// check all the window's events that were triggered since the last iteration of the loop
 		// For now, we just need this so we can click on the window and close it
 		Event event;
@@ -103,9 +116,12 @@ int main()
 				window.close();
 			else if (event.type == Event::KeyPressed)
 			{
-				if (event.key.code == Keyboard::Space)
+				if (event.key.code == Keyboard::Space && canshoot == true)
 				{
 					// handle space bar
+					ptr = new Missile(missiletexture, ship.getPosition());
+					list.addMissile(*ptr);
+					canshoot = false;
 				}
 				
 			}
@@ -127,7 +143,7 @@ int main()
 		// (the ship from previous frame was erased when we drew background)
 		window.draw(ship);
 
-
+		list.drawMissiles(window);
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
 		window.display();

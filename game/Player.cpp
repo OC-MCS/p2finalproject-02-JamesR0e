@@ -32,6 +32,6 @@ void Player::setposition(Vector2f coord)
 }
 Vector2f Player::getposition()
 {
-	return player.getPosition;
+	return player.getPosition();
 }
 
