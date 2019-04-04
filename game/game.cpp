@@ -1,3 +1,5 @@
+
+
 //=========================================================
 // This is just the starting point for your final project.
 // You are expected to modify and add classes/files as needed.
@@ -5,12 +7,17 @@
 // project (moving the little green ship). 
 //========================================================
 #include <iostream>
+#include "Missile.h"
+#include "MissilesList.h"
+#include "Player.h"
 using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf; 
 
 //============================================================
-// YOUR HEADER WITH YOUR NAME GOES HERE. PLEASE DO NOT FORGET THIS
+// James Roe
+// 4/19/19
+// Final Project: Space Invaders
 //============================================================
 
 // note: a Sprite represents an image on screen. A sprite knows and remembers its own position
@@ -19,6 +26,7 @@ using namespace sf;
 // x is horizontal, y is vertical. 
 // 0,0 is in the UPPER LEFT of the screen, y increases DOWN the screen
 void moveShip(Sprite& ship)
+
 {
 	const float DISTANCE = 5.0;
 
@@ -78,6 +86,8 @@ int main()
 	float shipX = window.getSize().x / 2.0f;
 	float shipY = window.getSize().y / 2.0f;
 	ship.setPosition(shipX, shipY);
+
+	Missiles list;
 
 
 	while (window.isOpen())
