@@ -6,11 +6,11 @@ using namespace sf;
 
 
 
-Alien::Alien(Texture texture, Vector2f coord, int lvl)
+Alien::Alien(Texture texture, Vector2f coord)
 {
 	alien.setTexture(texture);
 	alien.setPosition(coord);
-	alienlevel = lvl;
+	hit = false;
 }
 void Alien::move()
 {
@@ -20,5 +20,10 @@ void Alien::move()
 void Alien::draw(RenderWindow & win)
 {
 	win.draw(alien);
+}
+
+bool Alien::gethit()
+{
+	return hit;
 }
 void dropbomb();

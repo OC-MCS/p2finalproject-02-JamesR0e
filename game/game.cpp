@@ -10,6 +10,8 @@
 #include "Missile.h"
 #include "MissilesList.h"
 #include "Player.h"
+#include "Alien.h"
+#include "AliensList.h"
 using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf; 
@@ -74,6 +76,12 @@ int main()
 		cout << "Unable to load missile texture" << endl;
 		exit(EXIT_FAILURE);
 	}
+	Texture AlienTexture;
+	if (!AlienTexture.loadFromFile("enemy.png"))
+	{
+		cout << "unable to load alien texture" << endl;
+		exit(EXIT_FAILURE);
+	}
 
 	// A sprite is a thing we can draw and manipulate on the screen.
 	// We have to give it a "texture" to specify what it looks like
@@ -93,6 +101,8 @@ int main()
 	float shipY = window.getSize().y / 2.0f;
 	ship.setPosition(shipX, shipY);
 
+	AliensList aliens(AlienTexture);
+
 	Missiles list;
 	Missile* ptr;
 	int framecount = 0; //counts the frames for timing
@@ -101,7 +111,7 @@ int main()
 	while (window.isOpen())
 	{
 		framecount++;
-		if ((framecount % 30) == 29)
+		if ((framecount % 15) == 14)
 		{
 			canshoot = true;
 		}
@@ -138,11 +148,15 @@ int main()
 		window.draw(background);
 
 		moveShip(ship);
-
-		// draw the ship on top of background 
-		// (the ship from previous frame was erased when we drew background)
 		window.draw(ship);
 
+		aliens.removeAlien();
+		aliens.draw(window);
+		// draw the ship on top of background 
+		// (the ship from previous frame was erased when we drew background)
+		
+
+		list.removemissile(background);
 		list.drawMissiles(window);
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen

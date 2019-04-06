@@ -24,12 +24,14 @@ void Missiles::drawMissiles(RenderWindow & win)
 void Missiles::removemissile(Sprite background)
 {
 	list<Missile>::iterator iter;
-	for (iter = missiles.begin(); iter != missiles.end(); iter++)
+	for (iter = missiles.begin(); iter != missiles.end(); )
 	{
 		if (!background.getGlobalBounds().contains(iter->getposition()))
 		{
 			iter = missiles.erase(iter);
 		}
+		else
+		iter++;
 	}
 
 }

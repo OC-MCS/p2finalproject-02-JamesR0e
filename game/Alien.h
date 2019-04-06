@@ -8,10 +8,11 @@ class Alien
 {
 private:
 	Sprite alien;
-	int alienlevel;
+	bool hit;
 public:
-	Alien(Texture, Vector2f, int);
+	Alien(Texture, Vector2f);
 	void move();
 	void draw(RenderWindow & win);
 	void dropbomb();
+	bool gethit();
 };
