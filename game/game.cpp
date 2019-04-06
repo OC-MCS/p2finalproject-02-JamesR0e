@@ -98,7 +98,7 @@ int main()
 
 	// initial position of the ship will be approx middle of screen
 	float shipX = window.getSize().x / 2.0f;
-	float shipY = window.getSize().y / 2.0f;
+	float shipY = window.getSize().y / 1.2f;
 	ship.setPosition(shipX, shipY);
 
 	AliensList aliens(AlienTexture);
@@ -143,6 +143,7 @@ int main()
 		// render the next frame, and so on. All this happens ~ 60 times/second.
 		//===========================================================
 
+	
 		// draw background first, so everything that's drawn later 
 		// will appear on top of background
 		window.draw(background);
@@ -150,6 +151,7 @@ int main()
 		moveShip(ship);
 		window.draw(ship);
 
+		aliens.sethits(list);
 		aliens.removeAlien();
 		aliens.draw(window);
 		// draw the ship on top of background 

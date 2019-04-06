@@ -8,9 +8,12 @@ class Missile
 {
 private:
 	Sprite missile;
+	bool used;
 public:
 	Missile(Texture, Vector2f);
 	void move();
 	void draw(RenderWindow & win);
 	Vector2f getposition();
+	bool getUsed();
+	void setUsed(bool);
 };

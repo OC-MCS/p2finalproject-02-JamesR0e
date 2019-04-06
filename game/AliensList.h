@@ -4,6 +4,7 @@ using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf;
 #include "Alien.h"
+#include "MissilesList.h"
 #include <list>
 
 class AliensList
@@ -17,4 +18,5 @@ public:
 	void removeAlien();
 	void dropbomb();
 	void draw(RenderWindow & win);
+	void sethits(Missiles obj);
 };

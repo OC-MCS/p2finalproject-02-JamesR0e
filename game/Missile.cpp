@@ -8,6 +8,7 @@ Missile::Missile(Texture texture, Vector2f coord)
 {
 	missile.setTexture(texture);
 	missile.setPosition(coord);
+	used = false;
 }
 void Missile::move()
 {
@@ -20,4 +21,14 @@ void Missile::draw(RenderWindow & win)
 Vector2f Missile::getposition()
 {
 	return missile.getPosition();
+}
+
+bool Missile::getUsed()
+{
+	return used;
+}
+
+void Missile::setUsed(bool a)
+{
+	used = a;
 }

@@ -6,6 +6,7 @@ using namespace std;
 using namespace sf;
 #include "Alien.h"
 #include "AliensList.h"
+#include "MissilesList.h"
 
 void AliensList::addAlien(Texture text, Vector2f pos)
 {
@@ -20,7 +21,7 @@ AliensList::AliensList(Texture text)
 	pos.x = 0;
 	for (int i = 0; i < 10; i++)
 	{
-		pos.x += (i * 15);
+		pos.x += 65;
 		addAlien(text, pos);
 	}
 }
@@ -45,6 +46,21 @@ void AliensList::draw(RenderWindow & win)
 	{
 		iter->draw(win);
 		iter->move();
+	}
+}
+
+void AliensList::sethits(Missiles obj)
+{
+	list<Alien>::iterator iter;
+	list<Missile>::iterator it;
+	list<Missile> missilelist = obj.getmissileList();
+	
+	for (iter = alienslist.begin(); iter != alienslist.end(); iter++)
+	{
+		for (it = missilelist.begin(); it != missilelist.end(); it++)
+		{
+			iter->sethit(it->getposition(), *it);
+		}
 	}
 }
 

@@ -3,6 +3,7 @@ using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf;
 #include "Alien.h"
+#include "Missile.h"
 
 
 
@@ -14,7 +15,7 @@ Alien::Alien(Texture texture, Vector2f coord)
 }
 void Alien::move()
 {
-	alien.move(0, 1);
+	alien.move(0, .3);
 }
 
 void Alien::draw(RenderWindow & win)
@@ -25,5 +26,14 @@ void Alien::draw(RenderWindow & win)
 bool Alien::gethit()
 {
 	return hit;
+}
+void Alien::sethit(Vector2f missilepos, Missile obj)
+{
+	if (alien.getGlobalBounds().contains(missilepos))
+	{
+		hit = true;
+		obj.setUsed(true);
+	}
+	
 }
 void dropbomb();

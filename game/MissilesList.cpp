@@ -30,8 +30,17 @@ void Missiles::removemissile(Sprite background)
 		{
 			iter = missiles.erase(iter);
 		}
+		else if (iter->getUsed() == true)
+		{
+			iter = missiles.erase(iter);
+		}
 		else
 		iter++;
 	}
 
+}
+
+list<Missile> Missiles::getmissileList()
+{
+	return missiles;
 }
