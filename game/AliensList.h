@@ -6,17 +6,18 @@ using namespace sf;
 #include "Alien.h"
 #include "MissilesList.h"
 #include <list>
+#include "BombsList.h"
 
 class AliensList
 {
 private:
 	list<Alien> alienslist;
 	list<Alien>::iterator it;
-	void addAlien(Texture, Vector2f);
+	void addAlien(const Texture&, Vector2f);
 public:
-	AliensList(Texture);
+	AliensList(const Texture&);
 	void removeAlien();
-	void dropbomb();
+	void dropbombs(Texture, Bombslist);
 	void draw(RenderWindow & win);
 	void sethits(Missiles obj);
 };

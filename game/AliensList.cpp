@@ -7,14 +7,15 @@ using namespace sf;
 #include "Alien.h"
 #include "AliensList.h"
 #include "MissilesList.h"
+#include "BombsList.h"
 
-void AliensList::addAlien(Texture text, Vector2f pos)
+void AliensList::addAlien(const Texture & text, Vector2f pos)
 {
 	Alien* ptr;
 	ptr = new Alien(text, pos);
 	alienslist.push_back(*ptr);
 }
-AliensList::AliensList(Texture text)
+AliensList::AliensList(const Texture & text)
 {
 	Vector2f pos;
 	pos.y = 20;
@@ -65,4 +66,12 @@ void AliensList::sethits(Missiles obj)
 }
 
 
-void dropbomb();
+void AliensList::dropbombs(Texture bombstext, Bombslist bombslist)
+{
+	list<Alien>::iterator iter;
+	for (iter = alienslist.begin(); iter != alienslist.end(); iter++)
+	{
+		iter->dropbomb(bombstext, bombslist); //temporary bombdroping....add random generator
+	}
+
+}

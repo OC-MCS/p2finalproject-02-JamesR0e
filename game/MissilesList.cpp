@@ -4,6 +4,7 @@ using namespace std;
 using namespace sf;
 #include "MissilesList.h"
 #include "Missile.h"
+#include "MissileTexture.h"
 #include <list>
 
 void Missiles::addMissile(Missile m)
@@ -26,13 +27,10 @@ void Missiles::removemissile(Sprite background)
 	list<Missile>::iterator iter;
 	for (iter = missiles.begin(); iter != missiles.end(); )
 	{
-		if (!background.getGlobalBounds().contains(iter->getposition()))
+		if (!background.getGlobalBounds().contains(iter->getposition()) || iter->getUsed() == true)
 		{
 			iter = missiles.erase(iter);
-		}
-		else if (iter->getUsed() == true)
-		{
-			iter = missiles.erase(iter);
+			cout << "worked";
 		}
 		else
 		iter++;

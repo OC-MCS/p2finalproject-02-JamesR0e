@@ -4,13 +4,16 @@ using namespace std;
 using namespace sf;
 #include "Alien.h"
 #include "Missile.h"
+#include "Bomb.h"
+#include "BombsList.h"
 
 
 
-Alien::Alien(Texture texture, Vector2f coord)
+Alien::Alien(const Texture & texture, Vector2f coord)
 {
-	alien.setTexture(texture);
 	alien.setPosition(coord);
+	alien.setTexture(texture);
+
 	hit = false;
 }
 void Alien::move()
@@ -36,4 +39,9 @@ void Alien::sethit(Vector2f missilepos, Missile obj)
 	}
 	
 }
-void dropbomb();
+void Alien::dropbomb(Texture bombtext, Bombslist list)
+{
+	Bomb* ptr;
+	ptr = new Bomb(alien.getPosition(), bombtext);
+	list.addbomb(*ptr);
+}

@@ -148,9 +148,12 @@
   <ItemGroup>
     <ClCompile Include="Alien.cpp" />
     <ClCompile Include="AliensList.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombsList.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="MissilesList.cpp" />
+    <ClCompile Include="MissileTexture.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +162,17 @@
   <ItemGroup>
     <ClInclude Include="Alien.h" />
     <ClInclude Include="AliensList.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombsList.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="MissilesList.h" />
+    <ClInclude Include="MissileTexture.h" />
     <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Debug\enemy.png" />
+    <Image Include="Debug\missile.png" />
+    <Image Include="Debug\ship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

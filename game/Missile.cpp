@@ -4,15 +4,15 @@ using namespace std;
 using namespace sf;
 #include "Missile.h"
 
-Missile::Missile(Texture texture, Vector2f coord)
+Missile::Missile(Vector2f coord,const Texture & missiletext)
 {
-	missile.setTexture(texture);
 	missile.setPosition(coord);
+	missile.setTexture(missiletext);
 	used = false;
 }
 void Missile::move()
 {
-	missile.move(0, -10);
+	missile.move(0, -8);
 }
 void Missile::draw(RenderWindow & win)
 {

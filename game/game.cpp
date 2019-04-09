@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Alien.h"
 #include "AliensList.h"
+#include "MissileTexture.h"
 using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf; 
@@ -77,9 +78,15 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 	Texture AlienTexture;
-	if (!AlienTexture.loadFromFile("enemy.png"))
+	if (!AlienTexture.loadFromFile("enemy1.png"))
 	{
 		cout << "unable to load alien texture" << endl;
+		exit(EXIT_FAILURE);
+	}
+	Texture bombtexture;
+	if (!bombtexture.loadFromFile("enemy.png")) //temp
+	{
+		cout << "unable to load bomb texture" << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -108,6 +115,7 @@ int main()
 	int framecount = 0; //counts the frames for timing
 	bool canshoot = true;
 
+	Bombslist bombs;
 	while (window.isOpen())
 	{
 		framecount++;
@@ -129,7 +137,7 @@ int main()
 				if (event.key.code == Keyboard::Space && canshoot == true)
 				{
 					// handle space bar
-					ptr = new Missile(missiletexture, ship.getPosition());
+					ptr = new Missile(ship.getPosition(), missiletexture);
 					list.addMissile(*ptr);
 					canshoot = false;
 				}
@@ -151,13 +159,14 @@ int main()
 		moveShip(ship);
 		window.draw(ship);
 
+		aliens.dropbombs(bombtexture, bombs);
 		aliens.sethits(list);
 		aliens.removeAlien();
 		aliens.draw(window);
 		// draw the ship on top of background 
 		// (the ship from previous frame was erased when we drew background)
 		
-
+		bombs.draw(window);
 		list.removemissile(background);
 		list.drawMissiles(window);
 		// end the current frame; this makes everything that we have 
