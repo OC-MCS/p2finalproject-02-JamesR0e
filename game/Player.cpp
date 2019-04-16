@@ -18,9 +18,9 @@ int Player::getlives()
 {
 	return numlives;
 }
-void Player::removelife()
+void Player::setlives(int Num)
 {
-	numlives = numlives - 1;
+	numlives = Num;
 }
 void Player::draw(RenderWindow & win)
 {

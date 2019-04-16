@@ -12,4 +12,5 @@ private:
 public:
 	Bomb(Vector2f Alienpos, Texture bombtexture);
 	void draw(RenderWindow & win);
+	Vector2f getpos();
 };

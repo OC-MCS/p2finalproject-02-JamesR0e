@@ -17,7 +17,7 @@ public:
 	{
 		bombs = {};
 	}
-	void removebomb();
+	void removebomb(Sprite background);
 	void draw(RenderWindow & win);
 };
 

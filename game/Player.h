@@ -8,9 +8,8 @@ public:
 	Player(Texture, Vector2f, int);
 	void move(int, int);
 	int getlives();
-	void removelife();
+	void setlives(int);
 	void draw(RenderWindow & win);
 	void setposition(Vector2f);
 	Vector2f getposition();
-	void shootmissile();
 };

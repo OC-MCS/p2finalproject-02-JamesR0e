@@ -4,9 +4,9 @@ using namespace std;
 using namespace sf;
 #include "MissilesList.h"
 #include "Missile.h"
-#include "MissileTexture.h"
 #include <list>
 
+//add destructor
 void Missiles::addMissile(Missile m)
 {
 	missiles.push_back(m);

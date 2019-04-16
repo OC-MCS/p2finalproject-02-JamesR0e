@@ -28,7 +28,7 @@ bool Missile::getUsed()
 	return used;
 }
 
-void Missile::setUsed(bool a)
+void Missile::settrue()
 {
-	used = a;
+	used = true;
 }

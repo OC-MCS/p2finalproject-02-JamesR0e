@@ -4,7 +4,6 @@ using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf;
 #include "Missile.h"
-#include "MissileTexture.h"
 #include <list>
 class Missiles
 {

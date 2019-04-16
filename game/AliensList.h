@@ -16,8 +16,9 @@ private:
 	void addAlien(const Texture&, Vector2f);
 public:
 	AliensList(const Texture&);
-	void removeAlien();
-	void dropbombs(Texture, Bombslist);
+	void removeAlien(Sprite background);
+	void dropbombs(Texture &, Bombslist &);
 	void draw(RenderWindow & win);
 	void sethits(Missiles obj);
+	int aliensleft();
 };

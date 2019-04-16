@@ -39,7 +39,7 @@
     <ClCompile Include="BombsList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MissileTexture.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,14 +70,11 @@
     <ClInclude Include="BombsList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MissileTexture.h">
+    <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Debug\enemy.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Debug\missile.png">
       <Filter>Resource Files</Filter>
     </Image>

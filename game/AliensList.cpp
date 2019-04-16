@@ -8,8 +8,11 @@ using namespace sf;
 #include "AliensList.h"
 #include "MissilesList.h"
 #include "BombsList.h"
+#include <ctime>
+#include <cstdlib>
 
-void AliensList::addAlien(const Texture & text, Vector2f pos)
+//add destructor
+void AliensList::addAlien(const Texture & text, Vector2f pos) //change this to use the alien() constructor
 {
 	Alien* ptr;
 	ptr = new Alien(text, pos);
@@ -26,14 +29,15 @@ AliensList::AliensList(const Texture & text)
 		addAlien(text, pos);
 	}
 }
-void AliensList::removeAlien()
+void AliensList::removeAlien(Sprite background)
 {
 	list<Alien>::iterator iter;
 	for (iter = alienslist.begin(); iter != alienslist.end(); )
 	{
-		if (iter->gethit() == true)
+		if (iter->gethit() == true || !background.getGlobalBounds().contains(iter->getpos()))
 		{
 			iter = alienslist.erase(iter);
+			cout << "yay";
 		}
 		else
 		iter++;
@@ -66,12 +70,25 @@ void AliensList::sethits(Missiles obj)
 }
 
 
-void AliensList::dropbombs(Texture bombstext, Bombslist bombslist)
+void AliensList::dropbombs(Texture & bombstext, Bombslist & bombslist)
 {
+	int r;
 	list<Alien>::iterator iter;
-	for (iter = alienslist.begin(); iter != alienslist.end(); iter++)
+	srand(time(0));
+	bool shoot = true;
+	for (iter = alienslist.begin(); iter != alienslist.end() && shoot == true; iter++)
 	{
-		iter->dropbomb(bombstext, bombslist); //temporary bombdroping....add random generator
+		r = (rand() % 10);
+		if (r == 1)
+		{
+			iter->dropbomb(bombstext, bombslist);
+			shoot = false;
+		}
 	}
 
+}
+
+int AliensList::aliensleft()
+{
+	return alienslist.size();
 }

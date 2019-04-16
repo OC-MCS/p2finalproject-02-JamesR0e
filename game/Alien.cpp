@@ -34,14 +34,19 @@ void Alien::sethit(Vector2f missilepos, Missile obj)
 {
 	if (alien.getGlobalBounds().contains(missilepos))
 	{
+		obj.settrue();
 		hit = true;
-		obj.setUsed(true);
 	}
 	
 }
-void Alien::dropbomb(Texture bombtext, Bombslist list)
+void Alien::dropbomb(Texture & bombtext, Bombslist & list)
 {
 	Bomb* ptr;
 	ptr = new Bomb(alien.getPosition(), bombtext);
 	list.addbomb(*ptr);
+}
+
+Vector2f Alien::getpos()
+{
+	return alien.getPosition();
 }

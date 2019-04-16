@@ -16,3 +16,8 @@ void Bomb::draw(RenderWindow & win)
 	win.draw(bomb);
 	bomb.move(0, 3);
 }
+
+Vector2f Bomb::getpos()
+{
+	return bomb.getPosition();
+}

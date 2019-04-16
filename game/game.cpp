@@ -1,5 +1,4 @@
 
-
 //=========================================================
 // This is just the starting point for your final project.
 // You are expected to modify and add classes/files as needed.
@@ -7,12 +6,14 @@
 // project (moving the little green ship). 
 //========================================================
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "Missile.h"
 #include "MissilesList.h"
 #include "Player.h"
 #include "Alien.h"
 #include "AliensList.h"
-#include "MissileTexture.h"
+#include "UI.h"
 using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf; 
@@ -84,7 +85,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 	Texture bombtexture;
-	if (!bombtexture.loadFromFile("enemy.png")) //temp
+	if (!bombtexture.loadFromFile("enemy1.png")) //temp
 	{
 		cout << "unable to load bomb texture" << endl;
 		exit(EXIT_FAILURE);
@@ -108,42 +109,174 @@ int main()
 	float shipY = window.getSize().y / 1.2f;
 	ship.setPosition(shipX, shipY);
 
-	AliensList aliens(AlienTexture);
+	AliensList aliens1(AlienTexture); //level 1 aliens
+	AliensList aliens2(AlienTexture); //level 2 aliens; use different texture
 
 	Missiles list;
 	Missile* ptr;
 	int framecount = 0; //counts the frames for timing
 	bool canshoot = true;
-
+	int randomnum;
 	Bombslist bombs;
+	bool candrop;
+	UI userint;
+
+
+	
 	while (window.isOpen())
 	{
-		framecount++;
-		if ((framecount % 15) == 14)
-		{
-			canshoot = true;
-		}
-		// check all the window's events that were triggered since the last iteration of the loop
-		// For now, we just need this so we can click on the window and close it
+		
 		Event event;
-
-		while (window.pollEvent(event))
+		if (userint.getlevel() == 0) // no level
 		{
-			// "close requested" event: we close the window
-			if (event.type == Event::Closed)
-				window.close();
-			else if (event.type == Event::KeyPressed)
+			
+			while (window.pollEvent(event))
 			{
-				if (event.key.code == Keyboard::Space && canshoot == true)
+				// "close requested" event: we close the window
+				if (event.type == Event::Closed)
+					window.close();
+				
+				
+				else if (event.type == Event::MouseButtonReleased)
 				{
-					// handle space bar
-					ptr = new Missile(ship.getPosition(), missiletexture);
-					list.addMissile(*ptr);
-					canshoot = false;
+					//userinput for settings
+					Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+					userint.startinput(mousePos);
+
 				}
 				
 			}
+			window.clear();
+			userint.drawSTART(window);
+			window.display();
 		}
+		else if (userint.getlevel() == 1 && userint.getlives() > 0) //level 1
+		{
+			framecount++;
+			if ((framecount % 15) == 14)
+			{
+				canshoot = true;
+			}
+			while (window.pollEvent(event))
+			{
+				// "close requested" event: we close the window
+				if (event.type == Event::Closed)
+					window.close();
+				else if (event.type == Event::KeyPressed)
+				{
+					if (event.key.code == Keyboard::Space && canshoot == true)
+					{
+						// handle space bar
+						ptr = new Missile(ship.getPosition(), missiletexture);
+						list.addMissile(*ptr);
+						canshoot = false;
+					}
+
+				}
+			}
+			window.clear();
+			moveShip(ship);
+			window.draw(ship);
+			if (framecount % 20 == 1)
+			{
+				candrop = true;
+			}
+			randomnum = (rand() % 30);
+			if (randomnum == 1 && candrop == true)
+			{
+				aliens1.dropbombs(bombtexture, bombs);
+				candrop = false;
+			}
+
+			userint.drawNUMKILLED(window);
+			userint.setkills(framecount);
+			userint.drawNUMLIVES(window);
+			userint.drawNUMLEVEL(window);
+
+			aliens1.sethits(list);
+			aliens1.removeAlien(background);
+			aliens1.draw(window);
+
+			bombs.removebomb(background);
+			bombs.draw(window);
+			list.removemissile(background);
+			list.drawMissiles(window);
+			if (aliens1.aliensleft() == 0)
+			{
+				userint.setlevel(2);
+			}
+			window.display();
+		}
+		else if (userint.getlevel() == 2 && userint.getlives() > 0) //notcleared == true && numlives > 0)
+		{
+			framecount++;
+			if ((framecount % 15) == 14)
+			{
+				canshoot = true;
+			}
+			while (window.pollEvent(event))
+			{
+				// "close requested" event: we close the window
+				if (event.type == Event::Closed)
+					window.close();
+				else if (event.type == Event::KeyPressed)
+				{
+					if (event.key.code == Keyboard::Space && canshoot == true)
+					{
+						// handle space bar
+						ptr = new Missile(ship.getPosition(), missiletexture);
+						list.addMissile(*ptr);
+						canshoot = false;
+					}
+
+				}
+			}
+			window.clear();
+
+			moveShip(ship);
+			window.draw(ship);
+			if (framecount % 20 == 1)
+			{
+				candrop = true;
+			}
+			randomnum = (rand() % 30);
+			if (randomnum == 1 && candrop == true)
+			{
+				aliens2.dropbombs(bombtexture, bombs);
+				candrop = false;
+			}
+
+			userint.drawNUMKILLED(window);
+			userint.setkills(framecount);
+			userint.drawNUMLIVES(window);
+			userint.drawNUMLEVEL(window);
+
+			aliens2.sethits(list);
+			aliens2.removeAlien(background);
+			aliens2.draw(window);
+
+			bombs.removebomb(background);
+			bombs.draw(window);
+			list.removemissile(background);
+			list.drawMissiles(window);
+
+			window.display();
+		}
+		else if (userint.getlives() == 0)
+		{
+			userint.drawGAMEOVER(window);
+		}
+		else
+		{
+			userint.drawYOUWIN(window);
+		}
+
+	
+		// check all the window's events that were triggered since the last iteration of the loop
+		// For now, we just need this so we can click on the window and close it
+		
+
+		
 
 		//===========================================================
 		// Everything from here to the end of the loop is where you put your
@@ -156,22 +289,18 @@ int main()
 		// will appear on top of background
 		window.draw(background);
 
-		moveShip(ship);
-		window.draw(ship);
-
-		aliens.dropbombs(bombtexture, bombs);
-		aliens.sethits(list);
-		aliens.removeAlien();
-		aliens.draw(window);
+		
+		
+		
+		
+		//userint.drawNUMLEVEL(window);
+		
 		// draw the ship on top of background 
 		// (the ship from previous frame was erased when we drew background)
 		
-		bombs.draw(window);
-		list.removemissile(background);
-		list.drawMissiles(window);
+		
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
-		window.display();
 
 		// At this point the frame we have built is now visible on screen.
 		// Now control will go back to the top of the animation loop

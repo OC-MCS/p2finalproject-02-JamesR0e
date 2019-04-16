@@ -18,5 +18,18 @@ void Bombslist::draw(RenderWindow & win)
 		iter->draw(win);
 	}
 }
-
+void Bombslist::removebomb(Sprite background)
+{
+	list<Bomb>::iterator iter;
+	for (iter = bombs.begin(); iter != bombs.end(); )
+	{
+		if (!background.getGlobalBounds().contains(iter->getpos()))
+		{
+			iter = bombs.erase(iter);
+			cout << "bombdeleted";
+		}
+		else
+			iter++;
+	}
+}
 
