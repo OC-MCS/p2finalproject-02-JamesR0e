@@ -81,5 +81,14 @@
     <Image Include="Debug\ship.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="enemy1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bomb.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="enemy2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

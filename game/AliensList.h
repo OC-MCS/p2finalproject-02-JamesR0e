@@ -7,18 +7,18 @@ using namespace sf;
 #include "MissilesList.h"
 #include <list>
 #include "BombsList.h"
+#include "UI.h"
 
 class AliensList
 {
 private:
 	list<Alien> alienslist;
-	list<Alien>::iterator it;
-	void addAlien(const Texture&, Vector2f);
+	void addAlien(const Texture&, Vector2f, float);
 public:
-	AliensList(const Texture&);
-	void removeAlien(Sprite background);
+	AliensList(const Texture&, float speed);
+	void removeAlien(Sprite background, UI & obj);
 	void dropbombs(Texture &, Bombslist &);
 	void draw(RenderWindow & win);
-	void sethits(Missiles obj);
+	void sethits(Missiles & obj);
 	int aliensleft();
 };

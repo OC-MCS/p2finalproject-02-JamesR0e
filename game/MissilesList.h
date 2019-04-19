@@ -20,5 +20,5 @@ public:
 	void removemissile(Sprite background);
 	void addMissile(Missile m); // (timing logic in main)
 	void drawMissiles(RenderWindow & win);
-	list<Missile> getmissileList();
+	list<Missile>& getmissileList();
 };

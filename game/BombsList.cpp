@@ -6,10 +6,21 @@ using namespace sf;
 #include "BombsList.h"
 #include "Bomb.h"
 
+//====================================================== 
+// addbomb: adds a bomb to the list of bombs
+// parameters:  bomb
+// return type: n/a
+//======================================================
 void Bombslist::addbomb(Bomb bomb)
 {
 	bombs.push_back(bomb);
 }
+
+//====================================================== 
+//draw: draws all of the bombs in the list
+// parameters:  window
+// return type: n/a
+//======================================================
 void Bombslist::draw(RenderWindow & win)
 {
 	list<Bomb>::iterator iter;
@@ -18,6 +29,12 @@ void Bombslist::draw(RenderWindow & win)
 		iter->draw(win);
 	}
 }
+
+//====================================================== 
+// removebomb: deletes bombs that go off screen
+// parameters:  background
+// return type: n/a
+//======================================================
 void Bombslist::removebomb(Sprite background)
 {
 	list<Bomb>::iterator iter;
@@ -26,10 +43,20 @@ void Bombslist::removebomb(Sprite background)
 		if (!background.getGlobalBounds().contains(iter->getpos()))
 		{
 			iter = bombs.erase(iter);
-			cout << "bombdeleted";
 		}
 		else
 			iter++;
 	}
 }
+
+//====================================================== 
+// getlist: returns the list of bombs by reference
+// parameters:  n/a
+// return type: list<bomb>& (refence)
+//======================================================
+list<Bomb>& Bombslist::getlist()
+{
+	return bombs;
+}
+
 

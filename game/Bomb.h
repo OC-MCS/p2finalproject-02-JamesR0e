@@ -10,7 +10,7 @@ private:
 	Sprite bomb;
 	bool used;
 public:
-	Bomb(Vector2f Alienpos, Texture bombtexture);
+	Bomb(Vector2f Alienpos, Texture & bombtexture);
 	void draw(RenderWindow & win);
 	Vector2f getpos();
 };

@@ -19,5 +19,6 @@ public:
 	}
 	void removebomb(Sprite background);
 	void draw(RenderWindow & win);
+	list<Bomb>& getlist();
 };
 

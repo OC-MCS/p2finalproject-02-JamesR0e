@@ -170,8 +170,11 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bomb.png" />
     <Image Include="Debug\missile.png" />
     <Image Include="Debug\ship.png" />
+    <Image Include="enemy1.png" />
+    <Image Include="enemy2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
